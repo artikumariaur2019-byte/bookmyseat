@@ -104,13 +104,22 @@ WSGI_APPLICATION = 'bookmyseat.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
 DATABASES = {
     'default': dj_database_url.parse(
-        'postgresql://django_bookmyseat_ucec_user:jQvyDHKxKezRDb8P6R0jYMtfBZ13nkMc@dpg-daij4rnqj5pc73ab4h4g-a.oregon-postgres.render.com/django_bookmyseat_ucec',
+        'postgresql://bookmyseat_db_7vet_user:ejOps4unLT0QvLx5znimRJQHHa74QhTN@dpg-db88eamq1p3s739vv2d0-a.oregon-postgres.render.com/bookmyseat_db_7vet',
         conn_max_age=600,
         ssl_require=True,
     )
 }
+# DATABASES = {
+#     'default': dj_database_url.parse(
+#         'postgresql://django_bookmyseat_ucec_user:jQvyDHKxKezRDb8P6R0jYMtfBZ13nkMc@dpg-daij4rnqj5pc73ab4h4g-a.oregon-postgres.render.com/django_bookmyseat_ucec',
+#         conn_max_age=600,
+#         ssl_require=True,
+#     )
+# }
 
 
 

@@ -24,9 +24,11 @@
               <button class="btn btn-outline-primary mb-2 mb-sm-0">
                 IMAX 3D
               </button>
-              <button class="btn btn-outline-primary mb-2 mb-sm-0">
-                {{seats|length}} Tickets
+              
+              <button type="button" class="btn btn-outline-primary mb-2 mb-sm-0">
+                <span id="selected-count">0</span> Tickets Selected
               </button>
+
             </div>
           </div>
         </div>
@@ -104,6 +106,7 @@
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
   }
+
   .seat:hover {
     background-color: #28a745;
     color: white;
@@ -112,6 +115,16 @@
     background-color: #28a745;
     color: white;
   }
+
+  .seat:has(input[type="checkbox"]:checked) {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .seat label {
+    cursor: pointer;
+  }
+
   .seat.sold {
     background-color: #ccc;
     cursor: not-allowed;
@@ -145,5 +158,30 @@
     margin: 0 10px;
   }
 </style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll(
+        'input[name="seats"]'
+    );
+    const countElement = document.getElementById("selected-count");
+
+    function updateSelectedCount() {
+        const selectedCount = document.querySelectorAll(
+            'input[name="seats"]:checked'
+        ).length;
+
+        countElement.textContent = selectedCount;
+    }
+
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", updateSelectedCount);
+    });
+
+    updateSelectedCount();
+});
+</script>
+
 
 {% endblock %}
