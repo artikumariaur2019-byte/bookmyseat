@@ -85,16 +85,23 @@
           {{ movie.description|default:"Description not added yet."|linebreaksbr }}
       </p>
 
+      
       {% if movie.trailer_url %}
-      <a
-        href="{{ movie.trailer_url }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-danger mt-2"
-      >
-        Watch Trailer
-      </a>
+      <div class="mt-4">
+            <h4>Movie Trailer</h4>
+
+            <div class="ratio ratio-16x9">
+               <iframe
+                  src="{{ movie.trailer_url }}"
+                  title="{{ movie.name }} trailer"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen>
+                </iframe>
+            </div>
+      </div>
       {% endif %}
+
 
       <a href="{% url 'theater_list' movie.id %}" class="btn btn-primary mt-2">
         View Theaters & Book Tickets

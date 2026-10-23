@@ -86,6 +86,7 @@ class Movie(models.Model):
         return round(result["avg_rating"], 1) if result["avg_rating"] is not None else 0    
 
 
+
 class MoviePoster(models.Model):
     movie = models.ForeignKey(
         Movie,
@@ -95,8 +96,18 @@ class MoviePoster(models.Model):
     image = models.ImageField(upload_to="movie_posters/")
     is_primary = models.BooleanField(default=False)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["movie"],
+                condition=models.Q(is_primary=True),
+                name="unique_primary_poster_per_movie",
+            )
+        ]
+
     def __str__(self):
         return f"{self.movie.name} poster"
+
 
 
 class Theater(models.Model):
@@ -164,7 +175,7 @@ class Review(models.Model):
         related_name="movie_reviews",
     )
     rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(2), MaxValueValidator(10)],
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
     )
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
